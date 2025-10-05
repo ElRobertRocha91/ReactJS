@@ -1,0 +1,14 @@
+.galeria {
+    padding: 0px;
+}
+
+.listaIntereses {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+    padding: 10px;
+}
