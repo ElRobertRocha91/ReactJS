@@ -5,6 +5,7 @@ import Montaje from './Montaje'
 import Actualización from './Actualización'
 import Desmontaje from './Desmontaje'
 import Temporizador from './Temporizador'
+import Productos from './MockApi'
 import './App.css'
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
       <Desmontaje />  
       <h3>Ejemplo de useEffect con setInterval</h3>
       <Temporizador />
+      <h3>Ejemplo de useEffect con API</h3>
+      <Productos />
     </>
   )
 }
