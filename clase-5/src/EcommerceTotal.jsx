@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Layout({ children }) {
     return (
@@ -15,19 +15,38 @@ function Layout({ children }) {
 }
 
 function ListProducts({ agregarAlCarrito }) {
-    const products = [
-        { id: 1, nombre: 'Camiseta', precio: 15.000 },
-        { id: 2, nombre: 'Cantalón', precio: 30.000 },
-        { id: 3, nombre: 'Zapatos', precio: 50.000 }
-    ];
+    const [productos, setProductos] = useState([]);
+    const [cargando, setCargando ] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch('https://68ed704ddf2025af780033c1.mockapi.io/api/productos')
+        .then((respuesta) => respuesta.json())
+        .then((datos) => {
+            setProductos(datos);
+            setCargando(false);
+        })
+        .catch((error) => {
+            console.log('Error: ', error);
+            setError('Hubo un problema al cargar los productos.');
+            setCargando(false);
+        });
+    }, []);
+
+    if (cargando) {
+        return <p>Cargando productos...</p> 
+    }
+    if (error) {
+        return <p>{error}</p>
+    }
 
     return (
         <div>
             <h2>Productos disponibles</h2>
-            {products.map((product) => (
-                <div key={product.id}>
-                    <span>{product.nombre} - ${product.precio.toFixed(3)}</span>
-                    <button onClick={() => agregarAlCarrito(product)}>Agregar</button>
+            {productos.map((producto) => (
+                <div key={producto.id}>
+                    <span>{producto.nombre} - ${producto.precio}</span>
+                    <button onClick={() => agregarAlCarrito(producto)}>Agregar</button>
                 </div>
             ))}
         </div>

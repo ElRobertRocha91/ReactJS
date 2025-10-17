@@ -6,6 +6,7 @@ import Actualización from './Actualización'
 import Desmontaje from './Desmontaje'
 import Temporizador from './Temporizador'
 import Productos from './MockApi'
+import EcommercerTotal from './EcommerceTotal'
 import './App.css'
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
       <Temporizador />
       <h3>Ejemplo de useEffect con API</h3>
       <Productos />
+      <h3>Ejercicio - 5 integración de API</h3>
+      <EcommercerTotal />
     </>
   )
 }
