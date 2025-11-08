@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 import Carrito from "./Carrito";
 import styles from "../styles/pages/Productos.module.css";
 
@@ -10,7 +10,7 @@ function Productos() {
     const [error, setError] = useState(null);
 
     // Contexto del carrito
-    const { agregarAlCarrito } = useAppContext();
+    const { agregarAlCarrito } = useCartContext();
 
 
     useEffect(() => {
@@ -49,7 +49,7 @@ function Productos() {
                         Precio: ${producto.precio}
                         <br />
                         <br />
-                        <Link to={`/productos/${producto.id}`} state={{producto}}>Más detalle</Link>
+                        <Link to={`/productos/${producto.categoria || "sin-categoria"}/${producto.id}`} state={{producto}}>Más detalle</Link>
                         <br />
                             <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
                     </li>

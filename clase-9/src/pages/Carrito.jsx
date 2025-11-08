@@ -1,48 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 function Carrito() {
-    const { carrito, setCarrito, vaciarCarrito } = useAppContext();
+    const { carrito, vaciarCarrito, agregarCantidad, quitarCantidad, total } = useCartContext();
 
     const navigate = useNavigate();
-
-    // Lógica para sumar y restar cantidad
-    const quitarCantidad = (id) => {
-        const carritoActualizado = carrito.map(producto => {
-            if(producto.id === id) {
-                const cantidadActual = producto.cantidad || 1;
-                if(cantidadActual === 1) {
-                    return null;
-                }
-                return {
-                    ...producto,
-                    cantidad: cantidadActual - 1
-                }
-            }
-            return producto;
-        }).filter(producto => producto !== null);
-
-        setCarrito(carritoActualizado);
-    };
-
-    const agregarCantidad = (id) => {
-        const nuevoCarrito = carrito.map(producto => {
-            if (producto.id === id) {
-                return {
-                    ...producto,
-                    cantidad: (producto.cantidad || 1) + 1
-                }
-            }
-            return producto;
-        });
-        setCarrito(nuevoCarrito);
-    };
-
-    // Lógica para calcular el costo total de la compra
-    const total = carrito.reduce((sum, item) => {
-        const cantidad = item.cantidad || 1;
-        return sum + (Number(item.precio) * cantidad)
-    }, 0);
 
     const irAPagar = () => {
     navigate("/pagar", { state: { carrito } });
