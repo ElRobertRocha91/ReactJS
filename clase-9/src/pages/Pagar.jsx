@@ -1,18 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
+import { useCartContext } from "../context/CartContext";
 
 function Pagar() {
-  const { usuario, carrito, cerrarSesion, vaciarCarrito } = useAppContext()
+  const { usuario, cerrarSesion } = useAuthContext();
+  const { carrito, total, vaciarCarrito } = useCartContext();
   const navigate = useNavigate();
 
-  // Datos del carrito
-  // Calculo del total
-  // Por cantidad y precio por unidad
-  const total = carrito.reduce((suma, producto) => {
-    const cantidad = Number(producto.cantidad || 1);
-    const precioUnitario = Number(producto.precio || 0);
-    return suma + cantidad * precioUnitario;
-  }, 0);
+  const tokenActual = localStorage.getItem('authToken');
 
   // Función para finalizar compra
   const comprar = () => {
@@ -27,6 +22,9 @@ function Pagar() {
       <div>
         <h2>{usuario.nombre}</h2>
         <p>Email: {usuario.email}</p>
+        <div>
+          <strong>Token: </strong>{tokenActual}
+        </div>
         <button onClick={cerrarSesion}>Cerrar sesión</button>
         <hr />
       </div>
