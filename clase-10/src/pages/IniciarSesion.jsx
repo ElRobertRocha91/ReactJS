@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
+import styles from '../styles/pages/IniciarSesion.module.css';
 
 function IniciarSesion() {
   const { iniciarSesion } = useAuthContext();
@@ -26,7 +27,7 @@ function IniciarSesion() {
       navigate("/dashboard");
     
       // Lógica para usuarios normales - si No es admin
-     } else if (formulario.nombre && formulario.email & formulario.nombre !== "admin") {
+     } else if (formulario.nombre && formulario.email && formulario.nombre !== "admin") {
       // Guarda el email ingresado y pasa nombre para el token user
       localStorage.setItem("authEmail", formulario.email);
       iniciarSesion(formulario.nombre);
@@ -43,9 +44,10 @@ function IniciarSesion() {
   };
 
   return (
-    <div>
+    <main>
       <h1>Inicia sesión para continuar</h1>
-      <form onSubmit={manejarEnvio}>
+      <form onSubmit={manejarEnvio} className={styles.formulario}>
+        <div>
         <input
           type="text"
           placeholder="Nombre completo"
@@ -53,6 +55,8 @@ function IniciarSesion() {
           onChange={(e) => setFormulario({ ...formulario, nombre: e.target.value })}
           required
         />
+        </div>
+        <div>
         <input
           type="email"
           placeholder="Email"
@@ -60,13 +64,16 @@ function IniciarSesion() {
           onChange={(e) => setFormulario({ ...formulario, email: e.target.value })}
           required
         />
+        </div>
+        <div>
         <button type="submit">Iniciar Sesión</button>
         <strong> </strong>
         <button type="button" onClick={() => navigate('/productos')}>
           Cancelar
         </button>
+        </div>
       </form>
-    </div>
+    </main>
   );
 }
 

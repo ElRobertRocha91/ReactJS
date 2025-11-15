@@ -20,7 +20,7 @@ function Navbar() {
                 <li><Link to="/contacto">Contacto</Link></li>
                 {/* Enlace para ADMIN - Solo visible para el Admin */}
                 {usuario?.nombre === "admin" && (
-                    <li><Link to="/agrergar-producto">Agregar Producto</Link></li>
+                    <li><Link to="/agregar-producto">Agregar Producto</Link></li>
                 )}
                 <li>
                     {

@@ -41,17 +41,17 @@ function Productos() {
             <ul className={styles.list}>
                 {productos.map((producto) => (
                     <li key={producto.id} className={styles.item}>
-                        <img src={producto.avatar} alt={producto.nombre} width="250" />
+                        <img src={producto.avatar} alt={producto.nombre} width="250" height="250" />
                         <br />
                         Nombre: {producto.nombre}
                         {/* Descripción: {producto.descripcion} */}
                         <br />
                         Precio: ${producto.precio}
                         <br />
-                        <br />
                         <Link to={`/productos/${producto.categoria || "sin-categoria"}/${producto.id}`} state={{producto}}>Más detalle</Link>
                         <br />
-                            <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+                        <br />
+                        <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
                     </li>
                 ))}
             </ul>

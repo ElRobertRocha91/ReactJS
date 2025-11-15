@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
     // Verificar el token al cargar la aplicación
     useEffect(() => {
         const token = localStorage.getItem("authToken");
-        const emailGuardado = localStorage.getItem("AuthEmail");
+        const emailGuardado = localStorage.getItem("authEmail");
         if (token) {
             const username = token.replace("face-token-", "");
             setUsuario({

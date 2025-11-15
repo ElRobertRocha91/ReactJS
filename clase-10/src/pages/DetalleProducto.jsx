@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
+import styles from "../styles/pages/DetalleProducto.module.css";
 
 function DetalleProducto() {
     const { id } = useParams();
@@ -19,15 +20,20 @@ function DetalleProducto() {
             <section>
                 <h2>Detalle del Producto {id}</h2>
                 <br />
-                <li key={producto.id}>
-                    {producto.nombre}
-                    <br />
-                    <p><strong>Descripción: </strong>{producto.descripcion}</p>
-                    <p>Precio: ${producto.precio}</p>
-                    <img src={producto.avatar} alt={producto.nombre} width="80%" />
-                    <br />
-                    <Link to={'/productos'}>Volver</Link>
-                </li>
+                <div className={styles.tarjeta}>
+                    <li key={producto.id}>
+                        <div>
+                            <h3>{producto.nombre}</h3>
+                            <p><strong>Descripción: </strong>{producto.descripcion}</p>
+                            <p>Precio: ${producto.precio}</p>
+                        </div>
+                        <div>
+                            <img src={producto.avatar} alt={producto.nombre} width="350px" height="300px" />
+                        </div>
+                        <br />
+                        <Link to={'/productos'} className={styles.volver}>Volver</Link>
+                    </li>
+                </div>
             </section>
         </main>
     )

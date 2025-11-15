@@ -1,5 +1,6 @@
 import { useAuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import styles from "../styles/pages/Dashboard.module.css";
 
 function Dashboard() {
     const { usuario, cerrarSesion } = useAuthContext();
@@ -9,7 +10,7 @@ function Dashboard() {
 
     return (
         <main>
-            <div>
+            <div className={styles.dashboard}>
                 <h1>Dashboard Administrativo</h1>
                 <div>
                     <p>
@@ -26,15 +27,19 @@ function Dashboard() {
                     {/* Sección de acciones Admin */}
                     <div>
                         <h3>Acciones:</h3>
-                        <div>
-                            <Link to="/agregar-producto">Agregar nuevo producto</Link>
-                            <Link to="/productos">Ver todos los productos</Link>
+                        <div className={styles.acciones}>
+                            <div className={styles.link}>
+                                <Link to="/agregar-producto" className={styles.verde}>Agregar nuevo producto</Link>
+                            </div>
+                            <div className={styles.link}>
+                                <Link to="/productos" className={styles.celeste}>Ver todos los productos</Link>
+                            </div>
                         </div>
                     </div>
                     <hr />
 
                     {/* Botón cerrar sesión */}
-                    <button onClick={cerrarSesion}>Cerrar sesión</button>
+                    <button onClick={cerrarSesion} className={styles.rojo}>Cerrar sesión</button>
                 </div>
             </div>
         </main>

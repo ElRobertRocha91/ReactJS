@@ -18,9 +18,6 @@ function Servicios() {
                 Dolore animi omnis sit consectetur autem recusandae asperiores nesciunt maiores iusto esse, perferendis eligendi ut suscipit harum ducimus non soluta numquam doloremque vel? Quibusdam omnis architecto aliquam, iusto quos voluptas?
                 Ipsum, aperiam nostrum doloremque tempora quos delectus odio voluptates corrupti quasi laborum ratione sunt inventore ducimus cum harum error dicta sapiente, veritatis fugiat. Cupiditate exercitationem ex quasi laborum dolorem necessitatibus.
                 Sed magni fugiat magnam excepturi quos distinctio quo laudantium deserunt itaque rerum repellat vel, atque culpa incidunt dolorem ab necessitatibus eligendi reiciendis facere voluptatibus placeat accusamus. Molestiae dolores omnis maxime!
-                Explicabo unde labore sunt veritatis, laborum autem qui consectetur, at animi, eos itaque. Itaque, hic fugit? Suscipit accusamus praesentium dolorum neque doloremque amet id fuga! Aliquam nulla corrupti ab recusandae.
-                Ducimus iusto cupiditate, saepe quas ratione deleniti quasi minima a, sit dolorem molestiae dignissimos, inventore quisquam distinctio reprehenderit! Ad illum odio, quidem pariatur quo distinctio similique nostrum eos eveniet sit?
-                Assumenda, neque. Eum doloremque soluta odio porro. Vero, debitis in? Dignissimos beatae quibusdam nam perspiciatis nulla, fugit praesentium ducimus, et fugiat suscipit maiores voluptas harum eius id, similique neque odit!
                 <br />
                 <button><Link to="/">Volver al inicio</Link></button>
             </p>
