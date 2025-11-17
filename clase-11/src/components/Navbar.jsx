@@ -1,11 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
 import styles from "../styles/components/Navbar.module.css";
 
 function Navbar() {
     const { isAuthenticated, usuario, cerrarSesion } = useAuthContext();
-    const { carrito } = useCartContext();
+    const { carrito, vaciarCarrito } = useCartContext();
+    const navigate = useNavigate();
+
+    // Función para solucionar el BUGS detectado en la sesión.
+    // Limpia el carrito luego del cierre de sesión
+    const manejarCerrarSesion = () => {
+        navigate("/productos");
+
+        // Pausa de 1" para asegurar la navegación
+        setTimeout(() => {
+            vaciarCarrito();
+            cerrarSesion();
+        }, 100);
+    }
 
     return (
         <nav className={styles.container}>
@@ -34,7 +47,7 @@ function Navbar() {
                                         <Link to="/dashboard">Dashboard</Link>
                                     )}
                                 </div>
-                                <button onClick={cerrarSesion} className={styles.session}>Cerrar Sesión</button>
+                                <button onClick={manejarCerrarSesion} className={styles.session}>Cerrar Sesión</button>
                             </div>
                         ) : (
                             <Link to='/iniciar-sesion'>Iniciar Sesión</Link>
