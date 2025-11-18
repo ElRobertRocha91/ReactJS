@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
+import { useAuthContext } from "../context/AuthContext";
 import Carrito from "./Carrito";
 import styles from "../styles/pages/Productos.module.css";
 
@@ -8,10 +9,14 @@ function Productos() {
     const [productos, setProductos] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     // Contexto del carrito
     const { agregarAlCarrito } = useCartContext();
+    // Contexto para Admin
+    const { usuario } = useAuthContext();
 
+    const esAdmin = usuario?.nombre === "admin";
 
     useEffect(() => {
         fetch('https://68ed704ddf2025af780033c1.mockapi.io/api/productos')
@@ -52,6 +57,13 @@ function Productos() {
                         <br />
                         <br />
                         <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+                        {/* Botón Editar - SOLO visible para el admin */}
+                        {/* Operador Booleano */}
+                        {esAdmin && (
+                            <button onClick={() => navigate("/editar-producto", {state: { producto: producto }} )}>
+                                Editar
+                            </button>
+                        )}
                     </li>
                 ))}
             </ul>

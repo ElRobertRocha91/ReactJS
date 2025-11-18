@@ -11,6 +11,7 @@ import RutaProtegida from './pages/RutaProtegida'
 import Pagar from './pages/Pagar'
 import Dashboard from './pages/Dashboard'
 import FormProductos from './components/FormProductos'
+import EditarProductos from './components/EditarProductos'
 import Nosotros from './pages/Nosotros'
 import Contacto from './pages/Contacto'
 import Footer from './components/Footer'
@@ -46,6 +47,11 @@ function App() {
               <Route path='/agregar-producto' element={
                 <RutaProtegida soloAdmin={true}>
                   <FormProductos />
+                </RutaProtegida>
+              } />
+              <Route path='/editar-producto' element={
+                <RutaProtegida soloAdmin={true}>
+                  <EditarProductos />
                 </RutaProtegida>
               } />
               {/* -------------------------- */}
