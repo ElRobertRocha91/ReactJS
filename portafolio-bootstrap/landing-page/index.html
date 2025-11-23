@@ -11,11 +11,94 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div>
-            <a href="#">Portafolio</a>
+        <div class="container">
+            <a href="#" class="navbar-brand">Portafolio</a>
+            <!-- MENÚ HAMBURGUESA -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- LISTA MENÚ -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#Sobremi">Sobre mí</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Servicios">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-        
+
     </nav>
+
+    <main class="bg-warning text-black py-5 mt-3">
+        <div class="container text-center">
+            <h2>Roberto Rocha</h2>
+            <p class="lead">Lic. en Administración & Desarrollador de Software</p>
+        </div>
+    </main>
+
+    <!-- SECCIÓN SOBRE MÍ -->
+    <section class="container" id="Sobremi">
+        <h2 class="text-center p-3 mt-5">Sobre mí</h2>
+        <!-- COLUMNAS 2-->
+        <div class="row">
+            <div class="col-md-5">
+                <img src="../img/foto.jpeg" class="img-fluid mx-auto d-block" alt="foto">
+            </div>
+            <div class="col-md-7 py-3">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sequi enim incidunt atque natus
+                cupiditate assumenda est vitae cum rerum amet. Omnis consequatur similique mollitia doloremque atque
+                deserunt, quidem facere.
+                Iure, provident, veritatis hic maiores vel assumenda, quod sapiente labore ut id eligendi commodi porro
+                rerum corrupti ducimus animi. Odit tempora cum iste amet culpa debitis est facere ut rem!
+                <a href="https://github.com/ElRobertRocha91" target="_black" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    </section>
+    <!-- SECCIÓN SERVICIOS -->
+    <section class="container" id="Servicios">
+        <h2 class="text-center mt-3">Servicios</h2>
+        <!-- COLUMNAS 3 -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Desarrollo Web</h3>
+                        <p class="card-text">Desarrollo de páginas web con HTML/CSS/JS.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">React JS</h3>
+                        <p class="card-text">Creación de SPA y Tiendas Onlines, con tres secciones.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Desarrollador Java</h3>
+                        <p class="card-text">Desarrollo y creación de API RESTful, para gestión de productos. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5 bg-light p-4 rounded" id="contacto">
+
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
