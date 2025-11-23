@@ -1,0 +1,21 @@
+.inicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+.seccionInicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(106, 155, 61);
+    height: 300px;
+}
+
+.card {
+    border: 2px black solid;
+    border-radius: 15px;
+    margin: 0 50px;
+    padding: 10px;
+}
