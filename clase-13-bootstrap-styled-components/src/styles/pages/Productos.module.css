@@ -1,0 +1,15 @@
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    justify-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+.item {
+    border-radius: 15px;
+    border:  2px solid #fff;
+    max-width: 340px;
+    list-style: none;
+}
