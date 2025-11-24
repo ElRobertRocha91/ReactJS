@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Portafolio-Roberto-Rocha</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -33,9 +33,7 @@
                     </li>
                 </ul>
             </div>
-
         </div>
-
     </nav>
 
     <main class="bg-warning text-black py-5 mt-3">
@@ -65,7 +63,7 @@
     </section>
     <!-- SECCIÓN SERVICIOS -->
     <section class="container" id="Servicios">
-        <h2 class="text-center mt-3">Servicios</h2>
+        <h2 class="text-center mt-5">Servicios</h2>
         <!-- COLUMNAS 3 -->
         <div class="row">
             <div class="col-md-4">
@@ -94,14 +92,87 @@
             </div>
         </div>
     </section>
-
+    <!-- SECCIÓN CONTACTO -->
     <section class="container my-5 bg-light p-4 rounded" id="contacto">
+        <h2 class="text-center">Contacto</h2>
+        <form id="contact-form" action="" method="POST">
+            <!-- Establecemos una columna centrada -->
+            <div class="row justify-content-center">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="consulta" class="form-label">Mensaje:</label>
+                    <textarea name="mensaje" id="mensaje" rows="5" class="form-control"
+                        placeholder="Escriba su mensaje de consulta aquí..."></textarea>
+                </div>
 
+                <button type="submit" class="btn btn-primary mt-3" id="submit-btn">
+                    <span id="btn-enviar">Enviar</span>
+                    <div id="btn-spinner" class="spinner-border spinner-border-sm d-none" role="status">
+                        <span class="visually-hidden">Enviando...</span>
+                    </div>
+                </button>
+
+                <!-- MENSAJE DE ALERTA -->
+                <div id="alert-success" class="alert alert-success mt-3 d-none" role="alert">¡Mensaje enviado
+                    correctamente!</div>
+                <div id="alert-error" class="alert alert-danger mt-3 d-none" role="alert">Error al enviar el mensaje.
+                    Intenta nuevamente.</div>
+            </div>
+        </form>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <!-- SCRIPT PARA ENVIAR EL MENSAJE -->
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // CREO MIS VARIABLES CON LOS ID
+            const btnText = document.getElementById('btn-enviar');
+            const spinner = document.getElementById('btn-spinner');
+            const submitBtn = document.getElementById('submit-btn');
+            const successAlert = document.getElementById('aler-success');
+            const errorAlert = document.getElementById('alert-error');
+
+            // ESTADO DE CARGA
+            btnText.textContent = 'Enviando...';
+            spinner.classList.remove('d-none');
+            submitBtn.disabled = true;
+            successAlert.classList.add('d-none');
+            errorAlert.classList.add('d-none');
+
+            // ENVIAR A FORMSPREE
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        successAlert.classList.remove('d-none');
+                        this.reset();
+                    } else {
+                        errorAlert.classList.remove('d-none');
+                    }
+                })
+                .catch(() => errorAlert.classList.remove('d-none'))
+                .finally(() => {
+                    btnText.textContent = 'Enviar';
+                    spinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                });
+        })
+    </script>
 </body>
 
 </html>
