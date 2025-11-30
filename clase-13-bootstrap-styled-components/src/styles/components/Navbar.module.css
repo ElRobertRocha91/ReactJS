@@ -1,4 +1,4 @@
-.container {
+/* .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,6 +39,6 @@
 }
 
 .session {
-    /* padding: alto ancho ;*/
+    padding: alto ancho 
     padding: 5px 6px;
-}
+} */

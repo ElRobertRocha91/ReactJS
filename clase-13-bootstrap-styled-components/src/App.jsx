@@ -16,6 +16,8 @@ import EliminarProducto from './components/EliminarProducto'
 import Nosotros from './pages/Nosotros'
 import Contacto from './pages/Contacto'
 import Footer from './components/Footer'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './App.css'
 
 function App() {
