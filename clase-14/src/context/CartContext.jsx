@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -8,6 +9,23 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
     // Estado del Carrito
     const [carrito, setCarrito] = useState([]);
+    const [cargaCompleta, setCargaCompleta] = useState(false); // Flag o Bandera
+
+    // Establecemos un useEffect() para establecerlo en el localStorage
+    useEffect(() => {
+        const carritoGuardado = localStorage.getItem("carrito");
+        if (carritoGuardado) {
+            setCarrito(JSON.parse(carritoGuardado));
+        }
+        setCargaCompleta(true);
+    }, []);// El array de dependencia lo dejamos vacio, para que cargue solo una vez cuando cargue el componente
+
+    // Establecemos otro useEffect(), para que cada vez que carrito cambie, guardalo en localStorage
+    useEffect(() => {
+        if (cargaCompleta) { // Solo guarda en localstorage si la carga inicial ha terminado
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+    }, [carrito, cargaCompleta]); // Le establecemos el array de dependencia para que cada vez que carrito y cargacompleta cambie, ejecute este useEffect();
 
     // Funciones para el carrito
     const agregarAlCarrito = (producto) => {

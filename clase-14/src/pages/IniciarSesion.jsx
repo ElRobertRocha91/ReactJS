@@ -23,14 +23,14 @@ function IniciarSesion() {
       localStorage.setItem("authEmail", formulario.email);
       // setIsAuthenticated(true);
       // setUsuario(formulario);
-      iniciarSesion("admin");
+      iniciarSesion("admin", formulario.email);
       navigate("/dashboard");
     
       // Lógica para usuarios normales - si No es admin
      } else if (formulario.nombre && formulario.email && formulario.nombre !== "admin") {
       // Guarda el email ingresado y pasa nombre para el token user
       localStorage.setItem("authEmail", formulario.email);
-      iniciarSesion(formulario.nombre);
+      iniciarSesion(formulario.nombre, formulario.email);
 
       // Si venía del carrito, redirige a pagar
       if (ubicacion.state?.carrito) {

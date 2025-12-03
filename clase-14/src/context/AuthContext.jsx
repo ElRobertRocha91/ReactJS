@@ -6,6 +6,10 @@ export const AuthContext = createContext();
 // Proveedor de autenticación
 export function AuthProvider({ children }) {
     const [usuario, setUsuario] = useState(null);
+    // Establecemos el estado de cargando para ejecutarse en el UseEffect()
+    // para prevenir el undefined en el token del logalStorage, 
+    // dandole tiempo de ir a buscar el token a al DOM virtual de React
+    const [cargando, setCargando] = useState(true);
 
     // Verificar el token al cargar la aplicación
     useEffect(() => {
@@ -18,17 +22,21 @@ export function AuthProvider({ children }) {
                 email: emailGuardado || ""
             });
         }
+
+        setCargando(false);
     }, []);
 
     // Función para iniciar sesión
-    const iniciarSesion = (username) => {
+    const iniciarSesion = (username, emailIngresado) => {
         const token = `face-token-${username}`;
+        // Seteamos tanto el token y el email para lograr la persistencia de datos en la sesión del usuario
         localStorage.setItem("authToken", token);
+        localStorage.setItem("authEmail", emailIngresado);
 
-        const emailGuardado = localStorage.getItem("authEmail");
+        // const emailGuardado = localStorage.getItem("authEmail");
         setUsuario({
             nombre: username,
-            email: emailGuardado || ""
+            email: emailIngresado || ""
         });
     };
 
@@ -44,7 +52,8 @@ export function AuthProvider({ children }) {
         iniciarSesion,
         cerrarSesion,
         isAuthenticated: !!usuario, // => Propiedad computada
-        esAdmin: usuario?.nombre === 'admin'
+        esAdmin: usuario?.nombre === 'admin',
+        cargando
     }
 
     return (
