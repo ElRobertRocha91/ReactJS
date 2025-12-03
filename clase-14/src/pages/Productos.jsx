@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
 import { useProducts } from "../context/ProductsContext";
-import Carrito from "./Carrito";
+import { useEffect } from "react";
+// import Carrito from "./Carrito";
 import styles from "../styles/pages/Productos.module.css";
 
 function Productos() {
@@ -12,6 +13,37 @@ function Productos() {
     const { agregarAlCarrito } = useCartContext();
     // Contexto para Admin
     const { esAdmin } = useAuthContext();
+
+    // Helmet con SEO nativo
+    useEffect(() => {
+        document.title = "Tienda E-Commerce | Productos";
+
+        // Función para actualizar meta tags
+        const updateMetaTag = (name, content, attribute = 'name') => {
+            let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attribute, name);
+                document.head.appendChild(meta);
+            }
+            meta.content = content;
+        };
+
+        // Meta tags básicos
+        updateMetaTag('description', 'Explora el catálogo de juegos de mesa. Encuentra juegos históricos, clásicos, modernos y educativos.');
+        updateMetaTag('keywords', 'juegos de mesa, juegos históricos, juegos clásicos, juegos modernos, juegos educativos');
+        updateMetaTag('author', '@webmaster');
+        updateMetaTag('robots', 'index, follow');
+
+        // Open Graph
+        updateMetaTag('og:title', 'Tienda de Juegos de Mesa', 'property');
+        updateMetaTag('og:description', 'Explora el catálogo de juegos de mesa.', 'property');
+        updateMetaTag('og:type', 'website', 'property');
+        updateMetaTag('og:image', 'https://tudominio.com/logo.jpg', 'property');
+        updateMetaTag('og:url', window.location.href, 'property');
+
+    }, []);
 
     const manejarEliminar = (producto) => {
         // Navegar a la página de confirmación de eliminación
@@ -62,7 +94,7 @@ function Productos() {
                     </li>
                 ))}
             </ul>
-            <Carrito />
+            {/* <Carrito /> */}
         </main>
     )
 }
