@@ -18,6 +18,8 @@ import Contacto from './pages/Contacto'
 import Footer from './components/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 
 function App() {
@@ -64,6 +66,14 @@ function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
             <Footer />
+            <ToastContainer
+             position="bottom-center"
+              autoClose={3000}
+              hideProgressBar={false}
+              closeOnClick
+              draggable
+              pauseOnHover
+            />
           </ProductsProvicer>
         </CartProvider>
       </AuthProvider>

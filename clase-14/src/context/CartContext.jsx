@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 // Crear el contexto
 export const CartContext = createContext();
@@ -30,7 +31,7 @@ export function CartProvider({ children }) {
                 ];
             }
         });
-        alert(`Producto ${producto.nombre} agregado.`);
+        toast.success(`Producto ${producto.nombre} agregado.`);
     };
 
     const vaciarCarrito = () => {
