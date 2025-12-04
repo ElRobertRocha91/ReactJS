@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
 import { useProducts } from "../context/ProductsContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import Carrito from "./Carrito";
 import styles from "../styles/pages/Productos.module.css";
 
@@ -13,6 +13,10 @@ function Productos() {
     const { agregarAlCarrito } = useCartContext();
     // Contexto para Admin
     const { esAdmin } = useAuthContext();
+    // Estado para el Paginado
+    const [paginaActual, setPaginaActual] = useState(1);
+    // Estado para el Buscador
+    const [busqueda, setBusqueda] = useState("");
 
     // Helmet con SEO nativo
     useEffect(() => {
@@ -55,6 +59,32 @@ function Productos() {
         navigate('/formulario-producto', { state: { producto } });
     };
 
+    // Lógica para el Paginado
+    const productosPorPagina = 4;
+
+    const productosFiltrados = productos.filter(
+        (producto) =>
+            producto.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+            (producto.categoria &&
+                producto.categoria.toLowerCase().includes(busqueda.toLowerCase()))
+    );
+
+    const indiceUltimoProducto = paginaActual * productosPorPagina;
+    const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+    const productosActuales = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
+
+    // Cambiar de página
+    const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+    const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
+
+
+    // Resetear a página 1 con búsquedas
+    const manejarBusqueda = (e) => {
+        setBusqueda(e.target.value);
+        setPaginaActual(1);
+    };
+
+
     if (cargando) {
         return <p>Cargando productos...</p>
     }
@@ -66,8 +96,26 @@ function Productos() {
         <main>
             <h1>Lista de Productos</h1>
             <br />
+            {/* Barra de búsqueda */}
+            <div className="row mb-4">
+                <div className="col-12 col-md-6">
+                    <label className="form-label fw-bold">Buscar productos</label>
+                    <input
+                        type="text"
+                        placeholder="Buscar por nombre o categoría..."
+                        className="form-control"
+                        value={busqueda}
+                        onChange={manejarBusqueda}
+                    />
+                    {busqueda && (
+                        <small className="text-muted">
+                            Mostrando {productosFiltrados.length} de {productos.length} productos
+                        </small>
+                    )}
+                </div>
+            </div>
             <ul className={styles.list}>
-                {productos.map((producto) => (
+                {productosActuales.map((producto) => (
                     <li key={producto.id} className={styles.item}>
                         <img src={producto.avatar} alt={producto.nombre} width="250" height="250" />
                         <br />
@@ -94,8 +142,34 @@ function Productos() {
                     </li>
                 ))}
             </ul>
+            
             {/* <Carrito /> */}
-        </main>
+
+            {/* Paginador - Estilo simplificado */}
+            {productosFiltrados.length > productosPorPagina && (
+                <div className="d-flex justify-content-center my-4">
+                    {Array.from({ length: totalPaginas }, (_, index) => (
+                        <button
+                            key={index + 1}
+                            className={`btn mx-1 ${paginaActual === index + 1 ? "btn-primary" : "btn-outline-primary"}`}
+                            onClick={() => cambiarPagina(index + 1)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+            )}
+
+            {/* Información de la página actual */}
+            {productosFiltrados.length > 0 && (
+                <div className="text-center text-muted mt-2">
+                    <small>
+                        Mostrando {productosActuales.length} productos
+                        (página {paginaActual} de {totalPaginas})
+                    </small>
+                </div>
+            )}
+        </main >
     )
 }
 
